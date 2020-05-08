@@ -1,0 +1,93 @@
+Szeretnék egy felületet, ahol mozijegyet tudok foglalni. Szükségem van egy lista felületre is, ahol meg tudom tekinteni, szerkeszteni, és adott esetben törölni tudom a foglalásaimat.
+Az új felvétele / foglalás űrlap a következő módon nézzen ki:
+	- Filmválasztó
+	- Időpontválasztó (sima textes select)
+	- Megrendelő neve
+	- Megrendelő születési dátuma --> ez ahhoz kell, hogy megrendeléskor felugorjon figyelmeztetésként egy mat-snackbar, ha a megrendelő életkora nem felel meg a film besorolásának (pgRating)
+	- Kiválasztható helyek:
+		○ A lehető legegyszerűbben kezeld ezt: rajzolj ki egy táblázatot vagy css griddel egy 5x5-ös rácshálót és számozd be.
+		○ Az ülőhely kijelölése/törlése a cellákra kattintással történjen
+		○ A már foglalt székek háttere legyen piros
+		○ Az éppen kiválasztott székek háttere legyen zöld
+		○ A már foglalt székek nem választhatók ki
+		○ A kiválasztott székek a rácsháló mellett felsorolva jelenjenek meg:
+			§ Pl. X. sor Y. szék
+			§ Itt is legyen lehetőség törölni őket
+			§ Bejelölhető, hogy kiskorúnak szánjuk-e a jegyet (checkbox)
+	- A felnőtt jegy ára 1780 Ft, a gyermek jegy 35%-kal kevesebb
+	- Az űrlap alján jelenjen meg a kiválasztott jegyek összértéke
+	- Szerkesztés és törlés:
+		○ A foglalás a foglalás időpontja előtti 2 óráig szerkeszthető: tehát, ha a film 17:00-kor kezdődik, akkor aznap 15:00-ig szerkeszthető
+Lista:
+	- Szeretném, hogy ezt most mat-table-vel valósítsd meg, hogy kipróbáld, milyen
+	- A táblázat legyen időpontra vagy a foglaló nevére rendezhető
+	- Oszlopai:
+		○ Foglaló neve
+		○ Film címe
+		○ Vetítés időpontja
+		○ Rendelt jegyek száma
+		○ Foglalás összege
+
+Interfacek (ez javaslat a részemről)
+
+Jegyfoglaló nézőtér -- ne gondold túl ezt a dolgot, legyen a lehető legegyszerűbb.
+ISeat: {
+Id: number
+Taken: boolean
+}
+
+IMovieTheatre: {
+Row1: ISeat[];
+Row2: ISeat[];
+Row3: ISeat[];
+Row4: ISeat[];
+}
+
+Lesz egy IMovieTheatre objektumod, és ezt pörgeted ki a HTML-ben. Amikor egy cellára kattintanak, beállítod a háttérszínét és hozzáadsz egy objektumot (mondjuk row index + seatId) egy selected tömbhöz.
+De ha nem világos, beszéljük meg. Nem akarom, hogy túl sok időt tölts el vele feleslegesen.
+
+
+A projektet én generálom és adom, mert Angular 9-ben fogod csinálni, okosabb typescripttel:
+
+Pár szóban (ha valami nem világos, kérdezz, és olvass utána -- leginkább az optional chaining és a nullish coalescing érinthet)
+Typescript 3.7: https://medium.com/better-programming/new-typescript-features-you-should-check-out-f31d2fbf4bc9
+	- Optional chaining:
+		○ const x = a?.b?.c?.d
+		○ Kiesik a sok nullcheck
+		○ StrictNullCheck mellett hibát dob, ha egy metódusnak opcionális paramétere, de a metódus testében műveletet hajtunk végre rajta
+			let a = { b: { c: { d: 100 } } };
+			const divide = (a?: { b: { c: { d: 100 } } }) => {
+			return a?.b?.c?.d / 100;
+			}
+		○ Undefined-ot dob, ha nincs meg a paraméter, és nem az alkalmazás pusztul meg:
+			const adventurer = {
+			  name: 'Alice',
+			  cat: {
+			    name: 'Dinah'
+			  }
+			};
+			
+			const dogName = adventurer.dog?.name;
+			console.log(dogName);
+			// expected output: undefined
+			
+			console.log(adventurer.someNonExistentMethod?.())
+			// expected output: undefined
+			§ Ha x = {value: "érték"}; console.log(x?.value) ==> output: érték
+			§ Ha x = {value: null}; console.log(x?.value) ==> outout: null
+			§ Ha x = null; console.log(x?.value) ==> output: undefined
+			
+	- Nullish Coalescing
+		○ const x = foo ?? bar; "ha foo null/undefined, akkor x = bar"
+		○ const startDateValue = isPresent(sdControl) && isPresent(sdControl.value) ? sdControl.value : null; 
+		--->
+		const startDateValue = sdControl?.value ?? null
+		
+		isPresent(log) ? log.voucherDivisionLogs : []
+		--->
+		log?.voucherDivisionLogs ?? []
+	- Új arrayműveletek
+		○ Object.fromEntries
+		○ Array.flat
+		○ Array.flatMap
+
