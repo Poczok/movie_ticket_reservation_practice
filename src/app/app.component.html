@@ -2,8 +2,9 @@
   <mat-toolbar-row>
     <span>Movie Ticket Reservation System</span>
     <div class="ml-5">
-      <a mat-button [routerLink]=""> Reservations </a>
-      <a mat-button [routerLink]=""> New Reservation </a>
+      <a mat-button routerLink="/list"> Reservations </a>
+      <a mat-button routerLink=""> New Reservation </a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
+<router-outlet></router-outlet>
