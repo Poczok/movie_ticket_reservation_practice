@@ -1,15 +1,15 @@
-<table mat-table multiTemplateDataRows matSort [dataSource]="movies">
+<table mat-table matSort [dataSource]="movies">
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef  mat-sort-header>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
       Movies
     </th>
-    <td mat-cell *matCellDef="let element">
+    <td mat-cell *matCellDef="let element" class="pr-3">
       {{ element.title }}
     </td>
   </ng-container>
-  <ng-container matColumnDef="rating">
-    <th mat-header-cell *matHeaderCellDef>
-      Rating
+  <ng-container matColumnDef="pgRating">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      PG Rating
     </th>
     <td mat-cell *matCellDef="let element">
       {{ element.pgRating }}
@@ -20,9 +20,11 @@
       Date
     </th>
     <td mat-cell *matCellDef="let element">
-      <div *ngFor="let schedule of element.schedule | displayDates; index as i">
-        <span>{{schedule}}</span>
-      </div>
+      <ng-container *ngFor="let schedule of element.schedule | displayDates">
+        <div>
+          <span> {{ schedule }} </span>
+        </div>
+      </ng-container>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
