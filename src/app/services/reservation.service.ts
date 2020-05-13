@@ -5,10 +5,11 @@ import {IMovie} from "../model/IMovie.interface";
 @Injectable()
 export class ReservationService {
 
-  private mockApiUrl = 'http://localhost:3000/movies/';
+  private mockApiUrl = 'http://localhost:3000/';
+
   constructor(private http: HttpClient) { }
 
   getMovies() {
-    return this.http.get<IMovie[]>(this.mockApiUrl);
+    return this.http.get<IMovie[]>(this.mockApiUrl + 'movies');
   }
 }

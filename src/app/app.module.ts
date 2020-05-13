@@ -11,16 +11,20 @@ import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
-import { ReservationsComponent } from './reservations/reservations.component';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
 import {MatTableModule} from "@angular/material/table";
 import {DisplayDatesPipe} from "./pipes/displayDates.pipe";
 import {MatSortModule} from "@angular/material/sort";
+import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReservationsComponent,
-    DisplayDatesPipe
+    MovieListComponent,
+    DisplayDatesPipe,
+    ReservationListComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

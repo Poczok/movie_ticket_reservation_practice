@@ -1,0 +1,29 @@
+.position-td {
+  text-align: center;
+  vertical-align: middle;
+
+  &.title {
+    font-size: 24px;
+  }
+  &.pgRating {
+    font-size: 16px;
+  }
+}
+.position-th {
+  vertical-align: middle;
+
+  &.text {
+    text-align: center;
+  }
+}
+//a szép szóból nem értett, megDÍPeltem.
+::ng-deep .mat-sort-header-container {
+  justify-content: center;
+}
+.red-restriction {
+  color: red;
+  font-weight: bold;
+}
+.yellow-restriction {
+  color: darkorange;
+}
