@@ -23,7 +23,10 @@ export class ReservationsComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
-    this.reservationService.getMovies().pipe(catchError(err => throwError(err)), untilDestroyed(this))
+    this.reservationService
+      .getMovies()
+      .pipe(
+        catchError(err => throwError(err)), untilDestroyed(this))
       .subscribe((e: IMovie[]) => {
         this.movies = new MatTableDataSource(e);
         this.movies.sort = this.sort;
