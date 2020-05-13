@@ -4,6 +4,7 @@ import {ReservationsComponent} from "./reservations/reservations.component";
 
 
 const routes: Routes = [
+  {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: 'list', component: ReservationsComponent}
 ];
 
