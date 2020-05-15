@@ -1,13 +1,13 @@
 <ng-container *ngIf="form">
   <form [formGroup]="form" autocomplete="off" class="basic-view">
     <mat-form-field class="pr-5 pb-2">
-      <mat-label> SELECT A MOVIE</mat-label>
+      <mat-label> Select a movie </mat-label>
       <mat-select [formControl]="movieControl">
         <mat-option *ngFor="let movie of movies" [value]="movie.id">{{movie.title}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label> SELECT A DATE </mat-label>
+      <mat-label> Select a date </mat-label>
       <mat-select [formControl]="timeControl">
         <mat-optgroup *ngFor="let date of movieKeys; index as i" [label]="date">
           <mat-option *ngFor="let time of movieValues" [value]="time[i]"
@@ -22,7 +22,7 @@
         <input matInput type="text" [formControl]="nameControl">
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Date of Birth</mat-label>
+        <mat-label>Date of birth</mat-label>
         <input matInput type="date" [formControl]="dobControl" max="9999-12-31">
       </mat-form-field>
     </div>

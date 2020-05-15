@@ -43,6 +43,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
       .subscribe((e: IMovie[]) => {
         this.movies = e;
       });
+
     this.movieControl.valueChanges.pipe(untilDestroyed(this)).subscribe((e: number) => {
       if (e === null) {
         return;
@@ -61,12 +62,11 @@ export class ReservationComponent implements OnInit, OnDestroy {
           return of(null);
         }
         return this.reservationService.getReservationById(this.id).pipe(catchError(err => throwError(err)));
-      }),
-      untilDestroyed(this)
-    )
+      }), untilDestroyed(this))
       .subscribe((reservation: IReservation) => {
-        console.log(reservation);
-        this.form.patchValue(reservation);
+        if (reservation !== null) {
+          this.form.patchValue(reservation);
+        }
       });
   }
 
@@ -78,12 +78,16 @@ export class ReservationComponent implements OnInit, OnDestroy {
     }
     this.reservationService.updateReservation(this.form.getRawValue(), this.id)
       .pipe(catchError(err => throwError(err)), untilDestroyed(this))
-      .subscribe(e => {
+      .subscribe(_ => {
+        // ilyen esetben lehet használni az alávonást, ha nem akarunk jelenleg semmit sem kezdeni az érkező adattal?
         this.router.navigate(['movie-list']);
       })
   }
 
   public saveDate(date: string) {
+    // így tudtam kiszedni a date-et
+    // ez valamiért buggosan működik mert kétszer fut meg és csak két kattintásra frissül be a jó adattal a date,
+    // nem akartam túl sokat rugózni ezen, van egy olyan érzésem, hogy ez az egész rész itt nem jó :-/
     this.dateControl.setValue(date);
   }
 
