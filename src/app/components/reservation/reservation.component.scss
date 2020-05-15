@@ -1,0 +1,17 @@
+.basic-view {
+  background-color: #424242;
+  // mat table háttérszinét ide is beállítottam.
+  height: calc(100% - 64px);
+  // 64px a mat toolbar magassága, azért vontam ki a 100%-ból.
+  padding: 30px 30px 30px 60px;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  color: white !important;
+}
+::ng-deep.mat-form-field-ripple {
+  background-color: white !important;
+}
+input {
+  color: white;
+  background-color: #424242;
+}

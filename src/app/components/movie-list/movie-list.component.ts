@@ -14,7 +14,6 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class MovieListComponent implements OnInit, OnDestroy {
   public movies: MatTableDataSource<IMovie>;
-  // Remélem jó ez a típusosítás hozzá. (movies-hoz)
   public columnsToDisplay = ['title', 'pgRating', 'dates'];
 
   constructor(private reservationService: ReservationService) {
@@ -30,8 +29,6 @@ export class MovieListComponent implements OnInit, OnDestroy {
       .subscribe((e: IMovie[]) => {
         this.movies = new MatTableDataSource(e);
         this.movies.sort = this.sort;
-        /* a sortolást is muszáj volt idepakolnom, mert ha kivülről rakom direkt az ngOnInit-be, akkor lefut a subscribe előtt
-           és hibát dob. */
       });
   }
 

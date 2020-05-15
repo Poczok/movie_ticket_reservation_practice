@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {IMovie} from "../model/IMovie.interface";
+import {IReservation} from "../model/IReservation.interface";
 
 @Injectable()
 export class ReservationService {
@@ -11,5 +12,14 @@ export class ReservationService {
 
   getMovies() {
     return this.http.get<IMovie[]>(this.mockApiUrl + 'movies');
+  }
+  saveReservation(reservation: IReservation) {
+    return this.http.post(this.mockApiUrl + 'reservations', reservation);
+  }
+  getReservationById(id: string) {
+    return this.http.get<IReservation>(`${this.mockApiUrl + 'reservations/'}${id}`);
+  }
+  updateReservation(reservation: IReservation, id: string) {
+    return this.http.put<IReservation>(`${this.mockApiUrl + 'reservations/'}${id}`, reservation);
   }
 }

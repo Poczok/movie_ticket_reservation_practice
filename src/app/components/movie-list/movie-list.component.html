@@ -11,7 +11,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="position-th">
       PG Rating
     </th>
-    <td mat-cell *matCellDef="let element" class="position-td pgRating"
+    <td mat-cell *matCellDef="let element" class="position-td pgRating pr-4"
         [ngClass]="{'red-restriction' : element.pgRating >= 18, 'yellow-restriction' : (element.pgRating >= 16 && element.pgRating < 18)}">
       {{ element.pgRating }}
     </td>
