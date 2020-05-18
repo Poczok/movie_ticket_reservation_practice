@@ -16,10 +16,16 @@ export class ReservationService {
   saveReservation(reservation: IReservation) {
     return this.http.post(this.mockApiUrl + 'reservations', reservation);
   }
+  getReservations() {
+    return this.http.get<IReservation[]>(`${this.mockApiUrl + 'reservations/'}`);
+  }
   getReservationById(id: string) {
     return this.http.get<IReservation>(`${this.mockApiUrl + 'reservations/'}${id}`);
   }
   updateReservation(reservation: IReservation, id: string) {
     return this.http.put<IReservation>(`${this.mockApiUrl + 'reservations/'}${id}`, reservation);
+  }
+  deleteReservation(id: number) {
+    return this.http.delete<number>(`${this.mockApiUrl + 'reservations/'}${id}`);
   }
 }

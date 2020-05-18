@@ -44,13 +44,13 @@ export class ReservationComponent implements OnInit, OnDestroy {
         this.movies = e;
       });
 
-    this.movieControl.valueChanges.pipe(untilDestroyed(this)).subscribe((e: number) => {
+    this.movieControl.valueChanges.pipe(untilDestroyed(this)).subscribe((e: string) => {
       if (e === null) {
         return;
       }
-      this.selectedMovieSchedule = Object.entries(this.movies.find(f => f.id === e).schedule);
-      this.movieKeys = Object.keys(this.movies.find(f => f.id === e).schedule);
-      this.movieValues = Object.values(this.movies.find(f => f.id === e).schedule);
+      this.selectedMovieSchedule = Object.entries(this.movies.find(f => f.title === e).schedule);
+      this.movieKeys = Object.keys(this.movies.find(f => f.title === e).schedule);
+      this.movieValues = Object.values(this.movies.find(f => f.title === e).schedule);
       this.timeControl.setValue(null);
       this.dateControl.setValue(null);
     });
@@ -75,18 +75,20 @@ export class ReservationComponent implements OnInit, OnDestroy {
       this.reservationService.saveReservation(this.form.getRawValue()).pipe(untilDestroyed(this)).subscribe(e => {
         this.router.navigate(['movie-list']);
       });
-    }
+    } else {
     this.reservationService.updateReservation(this.form.getRawValue(), this.id)
       .pipe(catchError(err => throwError(err)), untilDestroyed(this))
       .subscribe(_ => {
         // ilyen esetben lehet használni az alávonást, ha nem akarunk jelenleg semmit sem kezdeni az érkező adattal?
-        this.router.navigate(['movie-list']);
+        this.router.navigate(['reservation-list']);
       })
+    }
   }
 
   public saveDate(date: string) {
     // így tudtam kiszedni a date-et
     // ez valamiért buggosan működik mert kétszer fut meg és csak két kattintásra frissül be a jó adattal a date,
+    // (onSelectionChange)="saveDate(date)" - ez valszeg így nem jó, csak második bekattintással menti el a kívánt adatot.
     // nem akartam túl sokat rugózni ezen, van egy olyan érzésem, hogy ez az egész rész itt nem jó :-/
     this.dateControl.setValue(date);
   }

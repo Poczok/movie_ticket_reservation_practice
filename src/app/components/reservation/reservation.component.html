@@ -3,7 +3,7 @@
     <mat-form-field class="pr-5 pb-2">
       <mat-label> Select a movie </mat-label>
       <mat-select [formControl]="movieControl">
-        <mat-option *ngFor="let movie of movies" [value]="movie.id">{{movie.title}}</mat-option>
+        <mat-option *ngFor="let movie of movies" [value]="movie.title">{{movie.title}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>

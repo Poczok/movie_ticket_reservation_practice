@@ -280,14 +280,5 @@
       }
     }
   ],
-  "reservations": [
-    {
-      "movie": 7,
-      "time": "10:30",
-      "date": "2020-06-06",
-      "name": "Saláta Ádám Zsolt",
-      "dob": "1898-06-06",
-      "id": 1
-    }
-  ]
+  "reservations": []
 }
