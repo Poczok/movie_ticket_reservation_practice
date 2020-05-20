@@ -80,6 +80,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
           console.log('visszatöltés', reservation)
           this.form.patchValue(reservation, {emitEvent: false});
           // this.timeControl.setValue(`${reservation.date}T${reservation.time}`, {emitEvent: false})
+          /*TODO: ezt majd megnézem, ha lesz idő*/
         }
       });
 
