@@ -280,5 +280,30 @@
       }
     }
   ],
-  "reservations": []
+  "reservations": [
+    {
+      "movie": "Alien",
+      "time": "14:00",
+      "date": "2020-06-01",
+      "name": "Teszt Elek",
+      "dob": "1991-02-03",
+      "id": 1
+    },
+    {
+      "movie": "Star Trek: Into Darkness",
+      "time": "21:30",
+      "date": "2020-06-30",
+      "name": "Teszt Elek",
+      "dob": "2020-12-12",
+      "id": 2
+    },
+    {
+      "movie": "Fifth Element",
+      "time": "08:15",
+      "date": "2020-06-01",
+      "name": "Teszt E",
+      "dob": "2000-12-12",
+      "id": 3
+    }
+  ]
 }

@@ -3,27 +3,31 @@
     <mat-form-field class="pr-5 pb-2">
       <mat-label> Select a movie </mat-label>
       <mat-select [formControl]="movieControl">
-        <mat-option *ngFor="let movie of movies" [value]="movie.title">{{movie.title}}</mat-option>
+        <!--TODO: value-ra jellemzően az id-t kötjük, de most itt nem baj, nincs két egyforma cím sem-->
+        <mat-option *ngFor="let movie of movies" [value]="movie.title">{{ movie.title }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-label> Select a date </mat-label>
       <mat-select [formControl]="timeControl">
         <mat-optgroup *ngFor="let date of movieKeys; index as i" [label]="date">
-          <mat-option *ngFor="let time of movieValues" [value]="time[i]"
-                      [title]="date + ' ' + time[i]" (onSelectionChange)="saveDate(date)">{{time[i]}}</mat-option>
+          <mat-option *ngFor="let time of movieValues" [value]="date + 'T' + time[i]" [title]="date + ' ' + time[i]">{{
+            time[i]
+          }}</mat-option>
+          <!-- (onSelectionChange)="saveDate(date)"
+-->
         </mat-optgroup>
       </mat-select>
-      <mat-hint *ngIf="dateControl.value">{{dateControl.value}}</mat-hint>
+      <mat-hint>{{ dateControl?.value }}</mat-hint>
     </mat-form-field>
     <div>
       <mat-form-field class="pr-5">
         <mat-label>Name and surname</mat-label>
-        <input matInput type="text" [formControl]="nameControl">
+        <input matInput type="text" [formControl]="nameControl" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Date of birth</mat-label>
-        <input matInput type="date" [formControl]="dobControl" max="9999-12-31">
+        <input matInput type="date" [formControl]="dobControl" max="9999-12-31" />
       </mat-form-field>
     </div>
     <ng-container>

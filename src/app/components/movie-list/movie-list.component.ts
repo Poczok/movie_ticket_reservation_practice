@@ -27,6 +27,8 @@ export class MovieListComponent implements OnInit, OnDestroy {
       .pipe(
         catchError(err => throwError(err)), untilDestroyed(this))
       .subscribe((e: IMovie[]) => {
+        /*TODO: ide jöhetett volna valami null check. Ha az e null, akkor mondjuk beállítod üres tömbre.
+        *  Mert ha null-t kap a new MatTableDataSource, akkor nem fog működni*/
         this.movies = new MatTableDataSource(e);
         this.movies.sort = this.sort;
       });

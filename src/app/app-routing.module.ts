@@ -8,8 +8,17 @@ import {ReservationListComponent} from "./components/reservation-list/reservatio
 const routes: Routes = [
   {path: '', redirectTo: '/movie-list', pathMatch: 'full'},
   {path: 'movie-list', component: MovieListComponent},
-  {path: 'reservations', component: ReservationComponent},
-  {path: 'reservations/:id', component: ReservationComponent},
+  /*TODO: Ha child route-jaid vannak, így javasolnám a használatot. Plusz új felvételekor
+  *  nem csak reservations, hanem a new-t is oda tenném*/
+  /*{path: 'reservations', component: ReservationComponent},
+  {path: 'reservations/:id', component: ReservationComponent},*/
+  {
+    path: 'reservations',
+    children: [
+      {path: 'new', component: ReservationComponent},
+      {path: ':id', component: ReservationComponent}
+    ]
+  },
   {path: 'reservation-list', component: ReservationListComponent}
 ];
 
